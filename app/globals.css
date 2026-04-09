@@ -1,26 +1,175 @@
 @import "tailwindcss";
 
+/* ============================================
+   LEGO My Play Festival — Design Tokens
+   From DESIGN_STYLE_GUIDE.md
+   ============================================ */
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Primary */
+  --lego-red: #E3000B;
+  --lego-yellow: #FFCF00;
+  --lego-blue: #006CB7;
+  --festival-purple: #63458E;
+  --leaf-green: #92BF3A;
+
+  /* Secondary */
+  --sky-blue: #33B3E2;
+  --brick-orange: #F68215;
+  --baseplate-pink: #E978A3;
+  --deep-red: #DC1E1F;
+  --deep-blue: #035991;
+
+  /* Neutrals */
+  --lego-black: #1D1D1B;
+  --white: #FFFFFF;
+  --off-white: #F5F3ED;
+  --sand-tan: #DAB791;
+
+  /* Minifig Skin */
+  --minifig-yellow: #FFCC00;
+
+  /* Shadows & Overlays */
+  --shadow-light: rgba(29, 29, 27, 0.08);
+  --shadow-medium: rgba(29, 29, 27, 0.16);
+  --shadow-heavy: rgba(29, 29, 27, 0.3);
+  --overlay-dark: rgba(29, 29, 27, 0.6);
+
+  /* Spring easing */
+  --spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* Spacing */
+  --space-xs: 8px;
+  --space-sm: 16px;
+  --space-md: 24px;
+  --space-lg: 40px;
+  --space-xl: 64px;
+  --space-2xl: 96px;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-fredoka: var(--font-fredoka-var);
+  --font-nunito: var(--font-nunito-var);
+
+  --color-lego-red: var(--lego-red);
+  --color-lego-yellow: var(--lego-yellow);
+  --color-lego-blue: var(--lego-blue);
+  --color-festival-purple: var(--festival-purple);
+  --color-leaf-green: var(--leaf-green);
+  --color-sky-blue: var(--sky-blue);
+  --color-brick-orange: var(--brick-orange);
+  --color-baseplate-pink: var(--baseplate-pink);
+  --color-deep-red: var(--deep-red);
+  --color-deep-blue: var(--deep-blue);
+  --color-lego-black: var(--lego-black);
+  --color-off-white: var(--off-white);
+  --color-sand-tan: var(--sand-tan);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ============================================
+   Base Styles
+   ============================================ */
+
+html, body {
+  overscroll-behavior: none;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--lego-black);
+  color: var(--lego-black);
+  font-family: var(--font-nunito-var), system-ui, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* ============================================
+   Animations
+   ============================================ */
+
+@keyframes pulse-cta {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+@keyframes float-brick {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-12px) rotate(5deg); }
+}
+
+@keyframes countdown-pop {
+  0% { transform: scale(0); opacity: 0; }
+  50% { transform: scale(1.2); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes slide-up-enter {
+  from { transform: translateY(100%); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes slide-up-exit {
+  from { transform: translateY(0); opacity: 1; }
+  to { transform: translateY(-20%); opacity: 0; }
+}
+
+@keyframes bounce-in {
+  0% { transform: translateY(-100px); opacity: 0; }
+  60% { transform: translateY(20px); opacity: 1; }
+  80% { transform: translateY(-8px); }
+  100% { transform: translateY(0); }
+}
+
+@keyframes walk-cycle {
+  0%, 100% { transform: rotate(-15deg); }
+  50% { transform: rotate(15deg); }
+}
+
+@keyframes flash {
+  0% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+.animate-pulse-cta {
+  animation: pulse-cta 2s ease-in-out infinite;
+}
+
+.animate-float-brick {
+  animation: float-brick 8s ease-in-out infinite;
+}
+
+.animate-countdown-pop {
+  animation: countdown-pop 0.8s var(--spring) forwards;
+}
+
+.animate-slide-up-enter {
+  animation: slide-up-enter 0.4s var(--spring) forwards;
+}
+
+.animate-bounce-in {
+  animation: bounce-in 0.5s var(--spring) forwards;
+}
+
+.animate-flash {
+  animation: flash 0.2s ease-out forwards;
+}
+
+/* ============================================
+   Stud pattern
+   ============================================ */
+
+.lego-stud {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 35% 35%,
+    rgba(255, 255, 255, 0.5) 0%,
+    transparent 60%
+  );
+  box-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.15),
+    inset 0 1px 2px rgba(255, 255, 255, 0.4);
 }
