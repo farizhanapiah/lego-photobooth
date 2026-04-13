@@ -2,15 +2,17 @@ const BFL_API_BASE = "https://api.bfl.ai";
 
 export function buildPrompt(name: string, gender: "male" | "female"): string {
   const genderDesc = gender === "male" ? "male" : "female";
-  return `Replace the main central lego minifigure in image 1 (the poster) with a new ${genderDesc} lego minifigure based on the person shown in image 2 (the photo reference).
+  return `EDIT TASK: Take the LEGO My Play Festival poster (input_image) and modify it by replacing the main central LEGO minifigure character.
 
-The new minifigure MUST be clearly ${genderDesc} and closely resemble the person in image 2: match their exact hair color, hair style, skin tone, facial hair if any, glasses if any, and clothing color and style. If they wear a hat or cap, give the minifigure a matching LEGO hat piece. If they have a beard or mustache, add it to the minifigure face. Copy the outfit colors and style from the reference photo onto the minifigure torso and legs.
+REFERENCE FACE (input_image_2): A real photograph of a ${genderDesc} person. Study this photo carefully — note their hair color, hair style, skin tone, facial features, age, any facial hair, glasses, hat, and clothing colors.
 
-Pose the new minifigure like it is running, in a dynamic forward-leaning pose with arms and legs mid-stride.
+WHAT TO DO: In the output, the central running minifigure must be a NEW ${genderDesc} LEGO minifigure that visually represents the person from input_image_2 in LEGO style. Make it look like a LEGO version of that specific person — same hair color and style as a LEGO hair piece, same skin if dark/light, matching outfit colors on the torso, and a running pose with legs mid-stride.
 
-Keep EVERYTHING else from the original poster (image 1) exactly the same: the LEGO logo on the top left, the Petronas Twin Towers in the background, the colorful LEGO baseplate ground, all floating bricks in the sky, all the other smaller minifigure characters on the sides, the birds and animals, and the "MY PLAY FESTIVAL" branding at the bottom.
+KEEP from the original poster: the LEGO logo top-left, Petronas Twin Towers, rainbow brick towers, colorful baseplate ground, floating LEGO bricks, the smaller side characters (Malaysia shirt minifig, burger minifig, parrot, tiger), and the "MY Play Festival" branding at the bottom.
 
-Do NOT add any extra text or titles to the image. Keep the top area of the poster clear with just the sky and towers. Make sure the LEGO logo on top left is always visible`;
+Add the title "I am ${name}" at the top of the poster in the same bold playful 3D LEGO-style lettering as the "Play Festival" text below, with red, yellow and white colors and thick black outlines.
+
+The output MUST be visibly different from the input — the central minifigure must clearly be a NEW character that looks like the person in input_image_2, not the original "I Love Malaysia" minifigure.`;
 }
 
 export async function submitFluxGeneration(

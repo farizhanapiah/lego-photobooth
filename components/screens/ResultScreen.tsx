@@ -16,8 +16,12 @@ export default function ResultScreen() {
   const [countdown, setCountdown] = useState(Math.floor(AUTO_RESET_TIMEOUT_MS / 1000));
   const [imageLoaded, setImageLoaded] = useState(false);
 
-  const appUrl = process.env.NEXT_PUBLIC_APP_URL || "";
-  const downloadUrl = `${appUrl}/api/download/${sessionId}`;
+  const [downloadUrl, setDownloadUrl] = useState("");
+
+  useEffect(() => {
+    const origin = process.env.NEXT_PUBLIC_APP_URL || window.location.origin;
+    setDownloadUrl(`${origin}/download/${sessionId}`);
+  }, [sessionId]);
 
   useEffect(() => {
     const timer = setInterval(() => {
